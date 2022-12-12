@@ -24,7 +24,7 @@ The purpose of this software was to develop an algorithmic trading system using 
     i.) The OHLCV dataset - representing the open, high, low, close & volume dataset for Morgan Stanley Capital International (MSCI) based emerging markets exchange traded fund (ETF issued by iShares [Blackrock]) - was imported into a Pandas DataFrame. Trading signals were established by using short & long-window simple moving average (SMA) values. The data was then manually split into training & testing datasets. 
 <br>
 <br>
-    ii.) Instantiate Support Vector Machine (SVM) (SVC) Classifier Model - Using the SciKit Learn (sklearn) support vector machine (SVM) learning method the training data was fit to make predictions based on the testing data. The prediction data was then reviewed & a classification report was generated for the SVC model predictions. i.) The OHLCV dataset was imported into a Pandas DataFrame. Trading signals were established by using short & long-window simple moving average (SMA) values. Note: In the original run model the short window = 4 and the long window = 100 period intervals. The data was then manually split into training & testing datasets.
+    ii.) Instantiate Support Vector Machine (SVM) (SVC) Classifier Model - Using the SciKit Learn (sklearn) support vector machine (SVM) learning method the training data was fit to make predictions based on the testing data. The prediction data was then reviewed & a classification report was generated for the SVC model predictions. The OHLCV dataset was imported into a Pandas DataFrame. Trading signals were established by using short & long-window simple moving average (SMA) values. Note: In the original run model the short window = 4 and the long window = 100 period intervals. The data was then manually split into training & testing datasets.
 <br>
 <br>
     iii.) Predictions Dataframe & Cumulative Return Plot - The above resulting data series were then compiled into a Dataframe that contains both the 'Predicted', 'Actual Returns', and 'Strategy Returns' in their own columns as well. A cumulative return plot was then generated that illustrates the actual returns vs the strategy returns. A .png image was saved and included in this report as a baseline to compare the affects of algorithm tuning later on.
@@ -62,17 +62,16 @@ The purpose of this software was to develop an algorithmic trading system using 
 
 ### <u>Results</u>
 
-- <u>Algorithmic Trading Bot:</u>
+- <u> Algorithmic Trading Bots:</u>
 
-  - <u>Baseline Model:</u>
+  - <u>1a.) Baseline Model:</u>
     <p align= "left" width="60">
     <img width= "35%" src="Starter_Code/strategy_fig1.png">
     </p>
 
-  - <u>Strategy Returns Using Support Vector Machine (SVC) Modelling:</u>
+  - <u>1b.) Strategy Returns Using Support Vector Machine (SVC) Modelling:</u>
 
-    The figure below illustrates the cumulative returns comparison of the 'Actual Returns' vs 'Strategy Returns' vs 'Strategy Support Vector Machine (SVC) Returns'.
-    It can be noted that by combining the X-features out of the SMA-short/long rolling average data and incorporating the original buy/sell signal data generated from the +/-1 actual daily percent change returns into a SVC Model, there is a slight cumulative returns advantage against the 'Actual Returns'. And there is a significant advantage over the baseline 'Strategy Returns [Original]' cumulative returns.
+    The figure below illustrates the cumulative returns comparison of the 'Actual Returns' vs 'Strategy Returns' vs 'Support Vector Machine (SVC) Strategy Returns'. It can be noted that by combining the X-features out of the SMA-short/long rolling average data and incorporating the original buy/sell signal data generated from the +/-1 actual daily percent change returns into a SVC Model, there is a slight cumulative returns advantage against the 'Actual Returns'. And there is a significant advantage over the baseline 'Strategy Returns [Original]' cumulative returns.
 
   <p align= "left" width="20">
   <img width= "50%" src="Starter_Code/actual_vs_strategy_fig2.png">
@@ -101,9 +100,9 @@ The purpose of this software was to develop an algorithmic trading system using 
   <br>
   <br>
 
-  - <u>Strategy Returns Using Support Vector Machine (SVC) Modelling #2 - Training Period Adjusted (60 Months Optimization):</u>
+  - <u>2.) Strategy Returns Using Support Vector Machine (SVC) Modelling #2 - Training Period Adjusted (60 Months Optimization):</u>
 
-    The figure below illustrates the cumulative returns comparison of the 'Actual Returns' vs 'Strategy Returns' vs 'Strategy Support Vector Machine (SVC) Returns'.
+    The figure below illustrates the cumulative returns comparison of the 'Actual Returns' vs 'Strategy Returns' vs 'Support Vector Machine (SVC) Strategy Returns' vs 'Support Vector Machine (SVM) SVC 2.0 [60mo train] Strategy Returns'.
     It can be noted that by combining the X-features out of the SMA-short/long rolling average data and incorporating the original buy/sell signal data generated from the +/-1 actual daily percent change returns into a SVC Model, there is a slight cumulative returns advantage against the 'Actual Returns'. And there is a significant advantage over the baseline 'Strategy Returns [Original]' cumulative returns.
 
   <p align= "left" width="20">
@@ -130,9 +129,83 @@ The purpose of this software was to develop an algorithmic trading system using 
     <img width= "35%" src="Starter_Code/class_report_SVC_Model_2_60months.png">
     </p>
 
-<br>
-<br>
+  <br>
+  <br>
+
+  - <u>3.) Strategy Returns Using Support Vector Machine (SVC) Modelling #3 - Adjusted SMA (Short Window = 3, Long Window = 50):</u>
+
+    The figure below illustrates the cumulative returns comparison of the 'Actual Returns' vs 'Strategy Returns' vs 'Support Vector Machine (SVC) Strategy Returns' vs 'Support Vector Machine (SVM) Strategy Returns (ADJUSTED SMA, Short Window = 3, Long Window = 50)'.
+
+  <p align= "left" width="20">
+  <img width= "50%" src="Starter_Code/actual_vs_strategy_svc_(ADJUSTED_SMA)_fig4.png">
+  </p>
+
+  - <u>Classification Report of Support Vector Machine (SVC) Modelling #3 - Adjusted SMA (Short Window = 3, Long Window = 50):</u>
+
+    Below is the summary classification report
+    <br>
+
+    |            | precision | recall | f1-score | support |
+    | ---------- | --------- | ------ | -------- | ------- |
+    | -1.0       | 1.00      | 0.00   | 0.00     | 1826    |
+    | 1.0        | 0.56      | 1.00   | 0.72     | 2321    |
+    | accuracy   |           |        | 0.56     | 4147    |
+    | macro avg  | 0.78      | 0.50   | 0.36     | 4147    |
+    | weight avg | 0.75      | 0.56   | 0.40     | 4147    |
+
+  <br>
+
+  - <u> Support Vector Machine (SVC) Modelling #3 - Adjusted SMA (Short Window = 3, Long Window = 50) Report Summary (From Data Above): </u>
+    <p align= "left" width="10">
+    <img width= "35%" src="Starter_Code/class_report_SVC_Model_3_ADJUSTED_SMA_3_50.png">
+    </p>
+
+  <br>
+  <br>
+
+  - <u>4.) Strategy Returns Using Logistic Regression Modelling #4:</u>
+
+    The figure below illustrates the cumulative returns comparison of the 'Actual Returns' vs 'Strategy Returns' vs 'Support Vector Machine (SVC) Strategy Returns' vs 'Strategy Returns Logistic Regression Model'.
+
+  <p align= "left" width="20">
+  <img width= "50%" src="Starter_Code/actual_vs_strategy_log_reg_model.png">
+  </p>
+
+  - <u>Classification Report of Logistic Regression Modelling #4:</u>
+
+    Below is the summary classification report
+    <br>
+
+    |            | precision | recall | f1-score | support |
+    | ---------- | --------- | ------ | -------- | ------- |
+    | -1.0       | 0.44      | 0.33   | 0.38     | 1804    |
+    | 1.0        | 0.56      | 0.66   | 0.61     | 2288    |
+    | accuracy   |           |        | 0.52     | 4092    |
+    | macro avg  | 0.50      | 0.50   | 0.49     | 4092    |
+    | weight avg | 0.51      | 0.52   | 0.51     | 4092    |
+
+  <br>
+
+  - <u> Logistic Regression Modelling #4 - Report Summary (From Data Above): </u>
+    <p align= "left" width="10">
+    <img width= "35%" src="Starter_Code/class_report_Logistic_Regression_Model.png">
+    </p>
 
 ### <u>Summary</u>
 
-Therefore, it was determined .
+Therefore, the following cumulative return results were obtained and retained with their own variable:
+<br>
+'The Strategy Returns produced a total return of 0.68x.'
+<br>
+'The Actual Returns produced a total return of 1.37x.'
+<br>
+'The Strategy Returns SVC produced a total return of 1.39x.'
+<br>
+'The Strategy Returns SVC 2.0 [60mo training set] produced a total return of 1.59x.'
+<br>
+'The Strategy Returns SVC (ADJUSTED SMA) produced a total return of 1.31x.'
+<br>
+'The Strategy Returns Logistic Regression produced a total return of 1.15x.'
+
+The strategy with the greatest cumulative returns multiple was therefore the SVC 2.0 model with the 60 month adjusted/modified training set with a return of 1.59x.
+The strategy with the least cumulative returns multiple was therefore the original Strategy Returns with a return of 0.68x.
